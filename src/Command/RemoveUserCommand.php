@@ -33,7 +33,7 @@ class RemoveUserCommand extends Command
                 'confirm',
                 InputOption::VALUE_OPTIONAL,
                 'Forcer la suppression sans confirmation',
-                "n"
+                null
             )
         ;
     }
