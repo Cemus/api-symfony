@@ -41,9 +41,8 @@ class ListUsersCommand extends Command
             $io->definitionList(
                 ["Id : " => $value->getId()],
                 ['Pseudonyme' => $value->getPseudonym()],
-                ['Email' => $value->getEmail()],
+                ['Email (UUID)' => $value->getEmail()],
                 ['Password' => $value->getPassword()],
-                "UUID : " . $value->getUserIdentifier(),
                 new TableSeparator(),
             );
         }
