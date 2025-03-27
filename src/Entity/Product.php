@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\ManyToMany;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     formats: ['json' => 'application/json'],
+    security: "is_granted('ROLE_USER')",
     operations: [
         new Get(
             uriTemplate: '/product/{id}',

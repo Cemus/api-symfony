@@ -43,21 +43,16 @@ class CreateUserCommand extends Command
         $pswd = $input->getArgument('pswd');
         $role = $input->getArgument('role');
 
-        if ($pseudo) {
-            $io->note(sprintf('Pseudonyme, check! : %s', $pseudo));
-        }
-        if ($email) {
-            $io->note(sprintf('Email, check! : %s', $email));
-        }
-        if ($pswd) {
-            $io->note(sprintf('Mot de passe, check! : %s', $pswd));
-        }
-        if ($role) {
-            $io->note(sprintf('Role, check! : %s', $role));
-        }
+
 
 
         try {
+            $io->definitionList(
+                ['Pseudonyme' => $pseudo],
+                ['Email (UUID)' => $email],
+                ['Password' => $pswd],
+            );
+
             if (!$this->accountRepository->findOneBy(["email" => $email])) {
                 $account = new Account();
                 $account->setPseudonym($pseudo);
@@ -67,7 +62,7 @@ class CreateUserCommand extends Command
                 if ($role) {
                     $account->setRoles([$role]);
                 } else {
-                    $io->info("Aucun rôle trouvé en argument, application du rôle de base");
+                    $io->info('Aucun rôle trouvé en argument, application du rôle "UTILISATEUR"');
                     $account->setRoles(["ROLE_USER"]);
                 }
 
